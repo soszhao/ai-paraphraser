@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free AI Paraphraser | Rewrite Text Instantly</title>
+  <meta name="description" content="Free AI text rewriting tool. No login required. Rewrite any text instantly.">
+  <meta name="keywords" content="paraphraser, AI writer, text rewriter, free AI tool">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+    body{max-width:800px;margin:40px auto;padding:0 20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+    .container{background:white;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.2)}
+    h1{color:#333;margin-bottom:10px;font-size:28px;text-align:center}
+    .subtitle{color:#666;margin-bottom:20px;font-size:16px;text-align:center}
+    textarea{width:100%;height:180px;padding:14px;margin:10px 0;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;resize:vertical;transition:border-color 0.3s}
+    textarea:focus{border-color:#667eea;outline:none;box-shadow:0 0 10px rgba(102,126,234,0.2)}
+    button{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border:none;padding:14px 32px;border-radius:10px;cursor:pointer;font-size:16px;font-weight:bold;transition:all 0.3s;width:100%}
+    button:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(102,126,234,0.4)}
+    button:disabled{background:#ccc;cursor:not-allowed;transform:none;box-shadow:none}
+    .result{margin-top:20px;padding:18px;background:#f8f9fa;border-radius:10px;min-height:100px;white-space:pre-wrap;font-size:15px;line-height:1.6;border:1px solid #e0e0e0}
+    .footer{margin-top:30px;text-align:center;padding:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:10px;color:white}
+    .footer a{color:white;font-weight:bold;text-decoration:underline}
+    .footer a:hover{text-decoration:none}
+    .limit-notice{color:#dc3545;font-size:14px;margin-top:10px;font-weight:bold}
+    .counter{color:#666;font-size:14px;margin-bottom:15px;text-align:center}
+    .features{display:flex;justify-content:center;gap:20px;margin:20px 0;flex-wrap:wrap}
+    .feature{text-align:center;padding:10px 20px;background:#f0f0f0;border-radius:8px;font-size:14px}
+    .feature span{display:block;font-size:24px;margin-bottom:5px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 Free AI Paraphraser</h1>
+    <p class="subtitle">Rewrite any text instantly. No login required.</p>
+    
+    <div class="features">
+      <div class="feature"><span>🆓</span>Free Daily Uses</div>
+      <div class="feature"><span>⚡</span>Instant Results</div>
+      <div class="feature"><span>🔒</span>No Login Needed</div>
+    </div>
+    
+    <p class="counter">✨ Free uses remaining today: <strong><span id="count">3</span>/3</strong></p>
+    
+    <textarea id="input" placeholder="Paste your text here to rewrite... (minimum 10 characters)"></textarea>
+    
+    <button onclick="rewrite()" id="btn">✨ Paraphrase Now</button>
+    
+    <div class="result" id="result">Your rewritten text will appear here...</div>
+  </div>
+  
+  <div class="footer">
+    <p style="font-size:18px;margin-bottom:10px;">💡 Want unlimited access & API keys?</p>
+    <p>📩 Contact Telegram: <a href="https://t.me/zhao5588" target="_blank">@zhao5588</a></p>
+    <p style="margin-top:15px;font-size:14px;opacity:0.9;">
+      ✅ $10 - Unlimited paraphrasing<br>
+      ✅ $15 - API key for developers<br>
+      ✅ $60 - Custom AI tool website<br>
+      <br>PayPal / USDT accepted
+    </p>
+  </div>
+
+  <script>
+    let count = parseInt(localStorage.getItem('paraphrase_count') || '0');
+    updateCounter();
+    
+    function updateCounter() {
+      document.getElementById('count').innerText = Math.max(0, 3 - count);
+    }
+    
+    async function rewrite() {
+      if(count >= 3) {
+        document.getElementById('result').innerHTML = '⚠️ Daily free limit reached!\n\n📩 Get unlimited access:\n👉 Telegram: @zhao5588\n\n✨ Pricing:\n• $10 - Unlimited paraphrasing\n• $15 - API key for your own projects\n• $60 - I build a custom AI tool for you\n\n💳 Payment: PayPal / USDT';
+        document.getElementById('btn').innerText = '⚠️ Limit Reached';
+        return;
+      }
+      
+      let text = document.getElementById('input').value.trim();
+      if(!text) {
+        alert('Please enter some text first!');
+        return;
+      }
+      
+      if(text.length < 10) {
+        alert('Text too short. Please enter at least 10 characters.');
+        return;
+      }
+      
+      let btn = document.getElementById('btn');
+      btn.disabled = true;
+      btn.innerText = '⏳ Processing...';
+      document.getElementById('result').innerText = '🔄 Rewriting your text...\n\nPlease wait a few seconds...';
+      
+      try {
+        const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer sk-d3039c06745e463cadd56d5cc0aec9d9"
+          },
+          body: JSON.stringify({
+            model: "deepseek-chat",
+            messages: [
+              {
+                role: "system", 
+                content: "You are a professional text rewriter. Rewrite the given text to make it unique while keeping the same meaning. Use different words and sentence structure. Keep the same tone and style."
+              },
+              {
+                role: "user", 
+                content: "Rewrite this text: " + text
+              }
+            ],
+            temperature: 0.7,
+            max_tokens: 2000
+          })
+        });
+        
+        if(!res.ok) {
+          throw new Error('API request failed: ' + res.status);
+        }
+        
+        const data = await res.json();
+        let out = data.choices?.[0]?.message?.content || "Error processing text. Please try again.";
+        
+        document.getElementById('result').innerText = out;
+        count++;
+        localStorage.setItem('paraphrase_count', count.toString());
+        updateCounter();
+        
+      } catch(e) {
+        document.getElementById('result').innerText = "❌ Error: " + e.message + "\n\nPlease try again or contact @zhao5588 for help.";
+      }
+      
+      btn.disabled = false;
+      btn.innerText = '✨ Paraphrase Now';
+    }
+    
+    // Reset counter at midnight
+    function resetAtMidnight() {
+      const now = new Date();
+      const lastReset = localStorage.getItem('last_reset_date');
+      const today = now.toDateString();
+      
+      if(lastReset !== today) {
+        count = 0;
+        localStorage.setItem('paraphrase_count', '0');
+        localStorage.setItem('last_reset_date', today);
+        updateCounter();
+      }
+    }
+    
+    resetAtMidnight();
+  </script>
+</body>
+</html>
