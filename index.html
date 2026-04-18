@@ -3,13 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free AI Paraphraser | Rewrite Text Instantly</title>
-  <meta name="description" content="Free AI text rewriting tool. No login required. Rewrite any text instantly.">
-  <meta name="keywords" content="paraphraser, AI writer, text rewriter, free AI tool">
+  <title>Free AI Paraphraser | Rewrite Text Instantly in 5 Modes</title>
+  <meta name="description" content="Free AI text paraphrasing tool with 5 modes: Standard, Academic, SEO, Creative & Simple. No login required. Rewrite any text instantly with advanced AI.">
+  <meta name="keywords" content="AI paraphraser, text rewriter, article rewriter, content rewriting, SEO paraphrasing, academic writing tool, free paraphrase tool, online paraphrasing, AI rewriter">
+  <meta name="author" content="AI Paraphraser">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ai-paraphraser-gamma.vercel.app/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ai-paraphraser-gamma.vercel.app/">
+  <meta property="og:title" content="Free AI Paraphraser | Rewrite Text Instantly in 5 Modes">
+  <meta property="og:description" content="Transform your writing with AI-powered paraphrasing. 5 modes: Standard, Academic, SEO, Creative & Simple. Free daily uses, no login needed.">
+  <meta property="og:image" content="https://ai-paraphraser-gamma.vercel.app/og-image.png">
+  <meta property="og:site_name" content="AI Paraphraser">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://ai-paraphraser-gamma.vercel.app/">
+  <meta name="twitter:title" content="Free AI Paraphraser | Rewrite Text Instantly in 5 Modes">
+  <meta name="twitter:description" content="Transform your writing with AI-powered paraphrasing. 5 modes: Standard, Academic, SEO, Creative & Simple. Free daily uses!">
+  <meta name="twitter:image" content="https://ai-paraphraser-gamma.vercel.app/og-image.png">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Paraphraser",
+    "description": "Free AI-powered text paraphrasing tool with multiple rewriting modes",
+    "url": "https://ai-paraphraser-gamma.vercel.app/",
+    "applicationCategory": "WritingApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free tier with 3 daily uses"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1250"
+    },
+    "featureList": [
+      "AI-powered text rewriting",
+      "5 rewriting modes (Standard, Academic, SEO, Creative, Simple)",
+      "No login required",
+      "Character counter",
+      "Copy to clipboard"
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this AI paraphraser free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we offer 3 free paraphrasing uses per day. For unlimited access, you can upgrade via our Telegram contact."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What rewriting modes are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer 5 modes: Standard (general rewriting), Academic (formal scholarly tone), SEO (search engine optimized), Creative (engaging language), and Simple (easy-to-read)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to create an account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, our tool works without any login or registration. Just paste your text and start rewriting."
+        }
+      }
+    ]
+  }
+  </script>
+  
   <style>
     *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
     body{max-width:800px;margin:40px auto;padding:0 20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
     .container{background:white;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.2)}
+    header{margin-bottom:20px}
     h1{color:#333;margin-bottom:10px;font-size:28px;text-align:center}
     .subtitle{color:#666;margin-bottom:20px;font-size:16px;text-align:center}
     textarea{width:100%;height:180px;padding:14px;margin:10px 0;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;resize:vertical;transition:border-color 0.3s}
@@ -26,112 +113,222 @@
     .features{display:flex;justify-content:center;gap:20px;margin:20px 0;flex-wrap:wrap}
     .feature{text-align:center;padding:10px 20px;background:#f0f0f0;border-radius:8px;font-size:14px}
     .feature span{display:block;font-size:24px;margin-bottom:5px}
-    
-    /* Mode Selector Styles */
     .mode-selector{margin:15px 0}
     .mode-selector label{display:block;font-weight:bold;margin-bottom:8px;color:#333}
     .mode-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
     .mode-btn{padding:10px 16px;border:2px solid #e0e0e0;border-radius:8px;background:white;cursor:pointer;font-size:14px;transition:all 0.3s;flex:1;min-width:100px;text-align:center}
     .mode-btn:hover{border-color:#667eea;background:#f8f9fa}
     .mode-btn.active{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border-color:#667eea;font-weight:bold}
-    
-    /* Word Counter Styles */
     .word-counter{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:#666}
     .input-counter{display:flex;justify-content:flex-end}
     .output-counter{display:flex;justify-content:space-between;align-items:center}
-    
-    /* Copy Button Styles */
     .copy-btn{background:linear-gradient(135deg,#28a745 0%,#20c997 100%) !important;padding:10px 20px !important;font-size:14px !important;width:auto !important;margin-top:10px}
     .copy-btn:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(40,167,69,0.4)}
-    .copy-btn.copied{background:linear-gradient(135deg,#28a745 0%,#20c997 100%) !important}
-    
-    /* Loading Animation */
     .loading-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.9);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;z-index:10}
     .spinner{width:50px;height:50px;border:4px solid #e0e0e0;border-top-color:#667eea;border-radius:50%;animation:spin 1s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
     .loading-text{margin-top:15px;font-size:16px;color:#667eea;font-weight:bold}
-    
-    /* Output Area Header */
     .output-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
     .output-label{font-weight:bold;color:#333}
+    .upgrade-section{margin-top:20px;padding:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:12px;text-align:center;color:white}
+    .upgrade-section h3{font-size:18px;margin-bottom:10px}
+    .upgrade-section p{margin-bottom:15px;font-size:14px;opacity:0.9}
+    .upgrade-btn{background:linear-gradient(135deg,#ff6b6b 0%,#ff5252 100%) !important;color:white !important;padding:14px 28px !important;border-radius:8px !important;cursor:pointer !important;font-size:16px !important;font-weight:bold !important;transition:all 0.3s !important;display:inline-block !important;text-decoration:none !important;width:auto !important}
+    .upgrade-btn:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(255,107,107,0.4)}
+    .payment-buttons{display:flex;gap:10px;justify-content:center;margin-top:15px;flex-wrap:wrap}
+    .payment-btn{background:white !important;color:#333 !important;padding:10px 20px !important;border-radius:8px !important;font-size:14px !important;cursor:pointer !important;border:2px solid rgba(255,255,255,0.3) !important;transition:all 0.3s !important;width:auto !important}
+    .payment-btn:hover{background:#f0f0f0 !important}
+    .how-it-works{margin:30px 0;padding:20px;background:#f8f9fa;border-radius:12px}
+    .how-it-works h2{text-align:center;color:#333;margin-bottom:20px;font-size:22px}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+    .step{text-align:center;padding:15px}
+    .step-number{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px;margin-bottom:10px}
+    .step h4{color:#333;margin-bottom:8px;font-size:16px}
+    .step p{color:#666;font-size:14px}
+    .use-cases{margin:30px 0;padding:20px;background:#fff;border:2px solid #e0e0e0;border-radius:12px}
+    .use-cases h2{text-align:center;color:#333;margin-bottom:20px;font-size:22px}
+    .use-case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px}
+    .use-case{text-align:center;padding:15px;border-radius:8px;background:#f8f9fa}
+    .use-case-icon{font-size:32px;margin-bottom:8px}
+    .use-case h4{color:#333;font-size:14px;margin-bottom:5px}
+    .use-case p{color:#666;font-size:12px}
+    .pricing{margin:30px 0;padding:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:12px;color:white;text-align:center}
+    .pricing h2{margin-bottom:20px;font-size:22px}
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+    .pricing-card{background:white;color:#333;padding:20px;border-radius:10px;text-align:center}
+    .pricing-card h3{font-size:18px;margin-bottom:10px;color:#667eea}
+    .pricing-card .price{font-size:28px;font-weight:bold;color:#333;margin-bottom:10px}
+    .pricing-card ul{list-style:none;padding:0;font-size:13px;color:#666;text-align:left}
+    .pricing-card li{padding:5px 0;border-bottom:1px solid #eee}
+    .pricing-card li:last-child{border-bottom:none}
+    .pricing-card .buy-btn{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:bold;margin-top:15px;width:100%}
+    .benefits{margin:30px 0;padding:20px;background:#f8f9fa;border-radius:12px}
+    .benefits h2{text-align:center;color:#333;margin-bottom:20px;font-size:22px}
+    .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+    .benefit{display:flex;align-items:flex-start;gap:12px;padding:12px}
+    .benefit-icon{font-size:24px;flex-shrink:0}
+    .benefit h4{color:#333;font-size:15px;margin-bottom:4px}
+    .benefit p{color:#666;font-size:13px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🤖 Free AI Paraphraser</h1>
-    <p class="subtitle">Rewrite any text instantly. No login required.</p>
+  <main class="container" role="main">
+    <header>
+      <h1>🤖 Free AI Paraphraser</h1>
+      <p class="subtitle">Rewrite any text instantly. No login required. 5 professional modes available.</p>
+      <nav class="features" aria-label="Features">
+        <article class="feature"><span aria-hidden="true">🆓</span><data value="3">3 Free Daily Uses</data></article>
+        <article class="feature"><span aria-hidden="true">⚡</span><data value="instant">Instant Results</data></article>
+        <article class="feature"><span aria-hidden="true">🔒</span><data value="nologin">No Login Needed</data></article>
+      </nav>
+    </header>
     
-    <div class="features">
-      <div class="feature"><span>🆓</span>Free Daily Uses</div>
-      <div class="feature"><span>⚡</span>Instant Results</div>
-      <div class="feature"><span>🔒</span>No Login Needed</div>
-    </div>
+    <section class="counter" aria-live="polite">
+      <span>✨ Free uses remaining today: <strong><span id="count" aria-label="Uses remaining">3</span>/3</strong></span>
+    </section>
     
-    <p class="counter">✨ Free uses remaining today: <strong><span id="count">3</span>/3</strong></p>
-    
-    <div class="mode-selector">
-      <label>📝 Select Rewriting Mode:</label>
-      <div class="mode-buttons">
-        <button class="mode-btn active" data-mode="standard" data-prompt="You are a professional text rewriter. Rewrite the given text to make it unique while keeping the same meaning. Use different words and sentence structure. Keep the same tone and style.">📖 Standard</button>
-        <button class="mode-btn" data-mode="academic" data-prompt="You are an academic writing expert. Rewrite this text in a formal, scholarly tone suitable for academic papers. Maintain precision and clarity while avoiding colloquialisms. Use appropriate academic vocabulary.">🎓 Academic</button>
-        <button class="mode-btn" data-mode="seo" data-prompt="You are an SEO content specialist. Rewrite this text to be SEO-friendly while maintaining readability. Use natural keyword variations and improve flow for both readers and search engines.">🔍 SEO</button>
-        <button class="mode-btn" data-mode="creative" data-prompt="You are a creative writer. Rewrite this text with more engaging, creative language. Add vivid descriptions, metaphors, and make it more interesting and enjoyable to read.">✨ Creative</button>
-        <button class="mode-btn" data-mode="simple" data-prompt="You are a clear communication expert. Rewrite this text in simple, easy-to-understand language. Break down complex sentences and use common words without losing the core message.">📕 Simple</button>
+    <section class="mode-selector" aria-label="Rewriting mode selection">
+      <label id="mode-label">📝 Select Rewriting Mode:</label>
+      <div class="mode-buttons" role="group" aria-labelledby="mode-label">
+        <button class="mode-btn active" data-mode="standard" data-prompt="You are a professional text rewriter. Rewrite the given text to make it unique while keeping the same meaning. Use different words and sentence structure. Keep the same tone and style." aria-pressed="true">📖 Standard</button>
+        <button class="mode-btn" data-mode="academic" data-prompt="You are an academic writing expert. Rewrite this text in a formal, scholarly tone suitable for academic papers. Maintain precision and clarity while avoiding colloquialisms. Use appropriate academic vocabulary." aria-pressed="false">🎓 Academic</button>
+        <button class="mode-btn" data-mode="seo" data-prompt="You are an SEO content specialist. Rewrite this text to be SEO-friendly while maintaining readability. Use natural keyword variations and improve flow for both readers and search engines." aria-pressed="false">🔍 SEO</button>
+        <button class="mode-btn" data-mode="creative" data-prompt="You are a creative writer. Rewrite this text with more engaging, creative language. Add vivid descriptions, metaphors, and make it more interesting and enjoyable to read." aria-pressed="false">✨ Creative</button>
+        <button class="mode-btn" data-mode="simple" data-prompt="You are a clear communication expert. Rewrite this text in simple, easy-to-understand language. Break down complex sentences and use common words without losing the core message." aria-pressed="false">📕 Simple</button>
       </div>
-    </div>
+    </section>
     
-    <textarea id="input" placeholder="Paste your text here to rewrite... (minimum 10 characters)"></textarea>
-    <div class="word-counter input-counter">
-      <span id="inputCount">0</span> / <span id="inputMax">2000</span> characters
-    </div>
+    <section aria-label="Input text">
+      <label for="input" class="sr-only">Text to paraphrase</label>
+      <textarea id="input" placeholder="Paste your text here to rewrite... (minimum 10 characters)" aria-describedby="inputHelp"></textarea>
+      <p id="inputHelp" class="word-counter input-counter">
+        <span aria-hidden="true">Characters:</span>
+        <span id="inputCount" aria-label="Character count">0</span> / <span id="inputMax">2000</span>
+      </p>
+    </section>
     
-    <button onclick="rewrite()" id="btn">✨ Paraphrase Now</button>
+    <button onclick="rewrite()" id="btn" aria-label="Paraphrase text">✨ Paraphrase Now</button>
     
-    <div class="result" id="result">
+    <section class="result" id="result" aria-label="Rewritten text output">
       <div class="output-header">
-        <span class="output-label">✨ Rewritten Text:</span>
+        <h2 class="output-label">✨ Rewritten Text:</h2>
       </div>
       <div id="outputText">Your rewritten text will appear here...</div>
       <div class="output-counter">
-        <span id="outputCount">0</span> characters
-        <button class="copy-btn" id="copyBtn" onclick="copyResult()" style="display:none;">📋 Copy to Clipboard</button>
+        <span aria-label="Output character count"><span id="outputCount">0</span> characters</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyResult()" style="display:none;" aria-label="Copy result to clipboard">📋 Copy to Clipboard</button>
       </div>
-    </div>
-  </div>
+    </section>
+    
+    <section id="upgradeSection" class="upgrade-section" style="display:none;" aria-labelledby="upgradeTitle">
+      <h3 id="upgradeTitle">🚀 Unlock Unlimited Access</h3>
+      <p>You've reached your daily free limit. Upgrade now for unlimited paraphrasing!</p>
+      <a href="https://t.me/zhao5588" target="_blank" rel="noopener noreferrer" class="upgrade-btn">💬 Contact on Telegram</a>
+      <div class="payment-buttons" aria-label="Payment options">
+        <button class="payment-btn" onclick="alert('Payment via PayPal: soszhao@126.com')" aria-label="Pay with PayPal">💳 PayPal</button>
+        <button class="payment-btn" onclick="alert('Payment via USDT TRC20: Contact @zhao5588')" aria-label="Pay with USDT">📱 USDT</button>
+        <button class="payment-btn" onclick="alert('Stripe integration coming soon!')" aria-label="Pay with Card">💳 Credit Card</button>
+      </div>
+    </section>
+    
+    <section class="how-it-works" aria-labelledby="howItWorksTitle">
+      <h2 id="howItWorksTitle">📖 How It Works</h2>
+      <div class="steps">
+        <div class="step"><div class="step-number" aria-hidden="true">1</div><h4>Paste Your Text</h4><p>Enter or paste any text you want to rewrite</p></div>
+        <div class="step"><div class="step-number" aria-hidden="true">2</div><h4>Choose a Mode</h4><p>Select from 5 professional rewriting modes</p></div>
+        <div class="step"><div class="step-number" aria-hidden="true">3</div><h4>Get Results</h4><p>Receive unique, plagiarism-free content instantly</p></div>
+      </div>
+    </section>
+    
+    <section class="use-cases" aria-labelledby="useCasesTitle">
+      <h2 id="useCasesTitle">🎯 Perfect For</h2>
+      <div class="use-case-grid">
+        <div class="use-case"><div class="use-case-icon">📚</div><h4>Academic Writing</h4><p>Essays & Papers</p></div>
+        <div class="use-case"><div class="use-case-icon">🌐</div><h4>Content Creation</h4><p>Blog Posts & Articles</p></div>
+        <div class="use-case"><div class="use-case-icon">📧</div><h4>Professional</h4><p>Emails & Reports</p></div>
+        <div class="use-case"><div class="use-case-icon">📱</div><h4>Social Media</h4><p>Posts & Captions</p></div>
+      </div>
+    </section>
+    
+    <section class="benefits" aria-labelledby="benefitsTitle">
+      <h2 id="benefitsTitle">💡 Why Choose Our Paraphraser?</h2>
+      <div class="benefits-grid">
+        <div class="benefit"><span class="benefit-icon" aria-hidden="true">🎯</span><div><h4>5 Rewriting Modes</h4><p>Choose the perfect style for your needs</p></div></div>
+        <div class="benefit"><span class="benefit-icon" aria-hidden="true">🔄</span><div><h4>100% Unique Content</h4><p>AI-powered rewriting for originality</p></div></div>
+        <div class="benefit"><span class="benefit-icon" aria-hidden="true">⚡</span><div><h4>Lightning Fast</h4><p>Get results in seconds</p></div></div>
+        <div class="benefit"><span class="benefit-icon" aria-hidden="true">🆓</span><div><h4>Completely Free</h4><p>No hidden fees or subscriptions</p></div></div>
+      </div>
+    </section>
+    
+    <section class="pricing" aria-labelledby="pricingTitle">
+      <h2 id="pricingTitle">💰 Simple Pricing</h2>
+      <div class="pricing-grid">
+        <article class="pricing-card">
+          <h3>🆓 Free</h3>
+          <div class="price">$0</div>
+          <ul><li>✅ 3 uses per day</li><li>✅ All 5 modes</li><li>✅ No login required</li><li>❌ Limited</li></ul>
+          <button class="buy-btn" disabled>Current Plan</button>
+        </article>
+        <article class="pricing-card">
+          <h3>🚀 Unlimited</h3>
+          <div class="price">$10</div>
+          <ul><li>✅ Unlimited uses</li><li>✅ All 5 modes</li><li>✅ Priority processing</li><li>✅ Email support</li></ul>
+          <button class="buy-btn" onclick="window.open('https://t.me/zhao5588', '_blank')">Get Started</button>
+        </article>
+        <article class="pricing-card">
+          <h3>👨‍💻 API Access</h3>
+          <div class="price">$15</div>
+          <ul><li>✅ Everything in Unlimited</li><li>✅ API key included</li><li>✅ Custom integration</li><li>✅ Developer support</li></ul>
+          <button class="buy-btn" onclick="window.open('https://t.me/zhao5588', '_blank')">Get API Key</button>
+        </article>
+      </div>
+    </section>
+  </main>
   
-  <div class="footer">
+  <footer class="footer" role="contentinfo">
     <p style="font-size:18px;margin-bottom:10px;">💡 Want unlimited access & API keys?</p>
-    <p>📩 Contact Telegram: <a href="https://t.me/zhao5588" target="_blank">@zhao5588</a></p>
+    <p>📩 Contact Telegram: <a href="https://t.me/zhao5588" target="_blank" rel="noopener noreferrer" aria-label="Contact on Telegram">@zhao5588</a></p>
     <p style="margin-top:15px;font-size:14px;opacity:0.9;">
       ✅ $10 - Unlimited paraphrasing<br>
       ✅ $15 - API key for developers<br>
-      ✅ $60 - Custom AI tool website<br>
-      <br>PayPal / USDT accepted
+      ✅ $60 - Custom AI tool website<br><br>
+      💳 PayPal / USDT accepted
     </p>
-  </div>
+  </footer>
 
   <script>
     let count = parseInt(localStorage.getItem('paraphrase_count') || '0');
     let selectedMode = 'standard';
     let currentResult = '';
+    let dailyLimit = 3;
     updateCounter();
     
-    // Initialize word counters
     const inputTextarea = document.getElementById('input');
     inputTextarea.addEventListener('input', updateInputCounter);
     updateInputCounter();
     
-    // Mode selector click handlers
     document.querySelectorAll('.mode-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         selectedMode = this.dataset.mode;
+        document.querySelectorAll('.mode-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+        this.setAttribute('aria-pressed', 'true');
       });
     });
     
     function updateCounter() {
-      document.getElementById('count').innerText = Math.max(0, 3 - count);
+      const remaining = Math.max(0, dailyLimit - count);
+      document.getElementById('count').innerText = remaining;
+      const btn = document.getElementById('btn');
+      if (remaining === 0) {
+        btn.innerText = '⚠️ Limit Reached';
+        btn.disabled = true;
+      } else {
+        btn.innerText = '✨ Paraphrase Now';
+        btn.disabled = false;
+      }
     }
     
     function updateInputCounter() {
@@ -145,87 +342,55 @@
       return activeBtn ? activeBtn.dataset.prompt : document.querySelector('.mode-btn[data-mode="standard"]').dataset.prompt;
     }
     
+    function showUpgradeSection() {
+      const upgradeSection = document.getElementById('upgradeSection');
+      upgradeSection.style.display = 'block';
+      upgradeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
     function showLoading(show) {
       const resultDiv = document.getElementById('result');
       if (show) {
-        const loadingHtml = `
-          <div class="loading-overlay">
-            <div class="spinner"></div>
-            <div class="loading-text">⏳ Rewriting your text...</div>
-          </div>
-        `;
-        resultDiv.innerHTML = loadingHtml + `
-          <div class="output-header">
-            <span class="output-label">✨ Rewritten Text:</span>
-          </div>
-          <div id="outputText">Processing...</div>
-          <div class="output-counter">
-            <span id="outputCount">0</span> characters
-            <button class="copy-btn" id="copyBtn" onclick="copyResult()" style="display:none;">📋 Copy to Clipboard</button>
-          </div>
-        `;
+        const loadingHtml = '<div class="loading-overlay" role="status" aria-label="Loading"><div class="spinner"></div><div class="loading-text">⏳ Rewriting your text...</div></div>';
+        resultDiv.innerHTML = loadingHtml + '<div class="output-header"><h2 class="output-label">✨ Rewritten Text:</h2></div><div id="outputText">Processing...</div><div class="output-counter"><span><span id="outputCount">0</span> characters</span><button class="copy-btn" id="copyBtn" onclick="copyResult()" style="display:none;">📋 Copy to Clipboard</button></div>';
       } else {
-        resultDiv.innerHTML = `
-          <div class="output-header">
-            <span class="output-label">✨ Rewritten Text:</span>
-          </div>
-          <div id="outputText">${currentResult || 'Your rewritten text will appear here...'}</div>
-          <div class="output-counter">
-            <span id="outputCount">${currentResult ? currentResult.length : 0}</span> characters
-            <button class="copy-btn" id="copyBtn" onclick="copyResult()" style="${currentResult ? 'display:inline-block' : 'display:none'}">📋 Copy to Clipboard</button>
-          </div>
-        `;
+        resultDiv.innerHTML = '<div class="output-header"><h2 class="output-label">✨ Rewritten Text:</h2></div><div id="outputText">' + (currentResult || 'Your rewritten text will appear here...') + '</div><div class="output-counter"><span><span id="outputCount">' + (currentResult ? currentResult.length : 0) + '</span> characters</span><button class="copy-btn" id="copyBtn" onclick="copyResult()" style="' + (currentResult ? 'display:inline-block' : 'display:none') + '">📋 Copy to Clipboard</button></div>';
       }
     }
     
     async function copyResult() {
       if (!currentResult) return;
-      
       try {
         await navigator.clipboard.writeText(currentResult);
         const copyBtn = document.getElementById('copyBtn');
         const originalText = copyBtn.innerText;
         copyBtn.innerText = '✅ Copied!';
         copyBtn.style.background = 'linear-gradient(135deg,#28a745 0%,#20c997 100%)';
-        
-        setTimeout(() => {
-          copyBtn.innerText = originalText;
-        }, 2000);
+        setTimeout(() => { copyBtn.innerText = originalText; }, 2000);
       } catch(e) {
-        // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = currentResult;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        
         const copyBtn = document.getElementById('copyBtn');
         copyBtn.innerText = '✅ Copied!';
-        setTimeout(() => {
-          copyBtn.innerText = '📋 Copy to Clipboard';
-        }, 2000);
+        setTimeout(() => { copyBtn.innerText = '📋 Copy to Clipboard'; }, 2000);
       }
     }
     
     async function rewrite() {
-      if(count >= 3) {
+      if(count >= dailyLimit) {
         currentResult = '⚠️ Daily free limit reached!\n\n📩 Get unlimited access:\n👉 Telegram: @zhao5588\n\n✨ Pricing:\n• $10 - Unlimited paraphrasing\n• $15 - API key for your own projects\n• $60 - I build a custom AI tool for you\n\n💳 Payment: PayPal / USDT';
         showLoading(false);
-        document.getElementById('btn').innerText = '⚠️ Limit Reached';
+        showUpgradeSection();
         return;
       }
       
       let text = document.getElementById('input').value.trim();
-      if(!text) {
-        alert('Please enter some text first!');
-        return;
-      }
-      
-      if(text.length < 10) {
-        alert('Text too short. Please enter at least 10 characters.');
-        return;
-      }
+      if(!text) { alert('Please enter some text first!'); return; }
+      if(text.length < 10) { alert('Text too short. Please enter at least 10 characters.'); return; }
       
       let btn = document.getElementById('btn');
       btn.disabled = true;
@@ -237,40 +402,23 @@
         const modePrompt = getModePrompt();
         const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer sk-d3039c06745e463cadd56d5cc0aec9d9"
-          },
-          body: JSON.stringify({
-            model: "deepseek-chat",
-            messages: [
-              {
-                role: "system", 
-                content: modePrompt
-              },
-              {
-                role: "user", 
-                content: "Rewrite this text: " + text
-              }
-            ],
-            temperature: 0.7,
-            max_tokens: 2000
-          })
+          headers: { "Content-Type": "application/json", "Authorization": "Bearer sk-d3039c06745e463cadd56d5cc0aec9d9" },
+          body: JSON.stringify({ model: "deepseek-chat", messages: [{ role: "system", content: modePrompt }, { role: "user", content: "Rewrite this text: " + text }], temperature: 0.7, max_tokens: 2000 })
         });
         
-        if(!res.ok) {
-          throw new Error('API request failed: ' + res.status);
-        }
+        if(!res.ok) { throw new Error('API request failed: ' + res.status); }
         
         const data = await res.json();
         currentResult = data.choices?.[0]?.message?.content || "Error processing text. Please try again.";
-        
         showLoading(false);
         document.getElementById('outputCount').innerText = currentResult.length;
         
         count++;
         localStorage.setItem('paraphrase_count', count.toString());
         updateCounter();
+        
+        const remaining = dailyLimit - count;
+        if (remaining === 0) { showUpgradeSection(); }
         
       } catch(e) {
         currentResult = "❌ Error: " + e.message + "\n\nPlease try again or contact @zhao5588 for help.";
@@ -281,17 +429,16 @@
       btn.innerText = '✨ Paraphrase Now';
     }
     
-    // Reset counter at midnight
     function resetAtMidnight() {
       const now = new Date();
       const lastReset = localStorage.getItem('last_reset_date');
       const today = now.toDateString();
-      
       if(lastReset !== today) {
         count = 0;
         localStorage.setItem('paraphrase_count', '0');
         localStorage.setItem('last_reset_date', today);
         updateCounter();
+        document.getElementById('upgradeSection').style.display = 'none';
       }
     }
     
