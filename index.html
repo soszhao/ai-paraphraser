@@ -17,7 +17,7 @@
     button{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border:none;padding:14px 32px;border-radius:10px;cursor:pointer;font-size:16px;font-weight:bold;transition:all 0.3s;width:100%}
     button:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(102,126,234,0.4)}
     button:disabled{background:#ccc;cursor:not-allowed;transform:none;box-shadow:none}
-    .result{margin-top:20px;padding:18px;background:#f8f9fa;border-radius:10px;min-height:100px;white-space:pre-wrap;font-size:15px;line-height:1.6;border:1px solid #e0e0e0}
+    .result{margin-top:20px;padding:18px;background:#f8f9fa;border-radius:10px;min-height:100px;white-space:pre-wrap;font-size:15px;line-height:1.6;border:1px solid #e0e0e0;position:relative}
     .footer{margin-top:30px;text-align:center;padding:20px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:10px;color:white}
     .footer a{color:white;font-weight:bold;text-decoration:underline}
     .footer a:hover{text-decoration:none}
@@ -26,6 +26,34 @@
     .features{display:flex;justify-content:center;gap:20px;margin:20px 0;flex-wrap:wrap}
     .feature{text-align:center;padding:10px 20px;background:#f0f0f0;border-radius:8px;font-size:14px}
     .feature span{display:block;font-size:24px;margin-bottom:5px}
+    
+    /* Mode Selector Styles */
+    .mode-selector{margin:15px 0}
+    .mode-selector label{display:block;font-weight:bold;margin-bottom:8px;color:#333}
+    .mode-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .mode-btn{padding:10px 16px;border:2px solid #e0e0e0;border-radius:8px;background:white;cursor:pointer;font-size:14px;transition:all 0.3s;flex:1;min-width:100px;text-align:center}
+    .mode-btn:hover{border-color:#667eea;background:#f8f9fa}
+    .mode-btn.active{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;border-color:#667eea;font-weight:bold}
+    
+    /* Word Counter Styles */
+    .word-counter{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:#666}
+    .input-counter{display:flex;justify-content:flex-end}
+    .output-counter{display:flex;justify-content:space-between;align-items:center}
+    
+    /* Copy Button Styles */
+    .copy-btn{background:linear-gradient(135deg,#28a745 0%,#20c997 100%) !important;padding:10px 20px !important;font-size:14px !important;width:auto !important;margin-top:10px}
+    .copy-btn:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(40,167,69,0.4)}
+    .copy-btn.copied{background:linear-gradient(135deg,#28a745 0%,#20c997 100%) !important}
+    
+    /* Loading Animation */
+    .loading-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.9);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;z-index:10}
+    .spinner{width:50px;height:50px;border:4px solid #e0e0e0;border-top-color:#667eea;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loading-text{margin-top:15px;font-size:16px;color:#667eea;font-weight:bold}
+    
+    /* Output Area Header */
+    .output-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .output-label{font-weight:bold;color:#333}
   </style>
 </head>
 <body>
@@ -41,11 +69,34 @@
     
     <p class="counter">✨ Free uses remaining today: <strong><span id="count">3</span>/3</strong></p>
     
+    <div class="mode-selector">
+      <label>📝 Select Rewriting Mode:</label>
+      <div class="mode-buttons">
+        <button class="mode-btn active" data-mode="standard" data-prompt="You are a professional text rewriter. Rewrite the given text to make it unique while keeping the same meaning. Use different words and sentence structure. Keep the same tone and style.">📖 Standard</button>
+        <button class="mode-btn" data-mode="academic" data-prompt="You are an academic writing expert. Rewrite this text in a formal, scholarly tone suitable for academic papers. Maintain precision and clarity while avoiding colloquialisms. Use appropriate academic vocabulary.">🎓 Academic</button>
+        <button class="mode-btn" data-mode="seo" data-prompt="You are an SEO content specialist. Rewrite this text to be SEO-friendly while maintaining readability. Use natural keyword variations and improve flow for both readers and search engines.">🔍 SEO</button>
+        <button class="mode-btn" data-mode="creative" data-prompt="You are a creative writer. Rewrite this text with more engaging, creative language. Add vivid descriptions, metaphors, and make it more interesting and enjoyable to read.">✨ Creative</button>
+        <button class="mode-btn" data-mode="simple" data-prompt="You are a clear communication expert. Rewrite this text in simple, easy-to-understand language. Break down complex sentences and use common words without losing the core message.">📕 Simple</button>
+      </div>
+    </div>
+    
     <textarea id="input" placeholder="Paste your text here to rewrite... (minimum 10 characters)"></textarea>
+    <div class="word-counter input-counter">
+      <span id="inputCount">0</span> / <span id="inputMax">2000</span> characters
+    </div>
     
     <button onclick="rewrite()" id="btn">✨ Paraphrase Now</button>
     
-    <div class="result" id="result">Your rewritten text will appear here...</div>
+    <div class="result" id="result">
+      <div class="output-header">
+        <span class="output-label">✨ Rewritten Text:</span>
+      </div>
+      <div id="outputText">Your rewritten text will appear here...</div>
+      <div class="output-counter">
+        <span id="outputCount">0</span> characters
+        <button class="copy-btn" id="copyBtn" onclick="copyResult()" style="display:none;">📋 Copy to Clipboard</button>
+      </div>
+    </div>
   </div>
   
   <div class="footer">
@@ -61,15 +112,106 @@
 
   <script>
     let count = parseInt(localStorage.getItem('paraphrase_count') || '0');
+    let selectedMode = 'standard';
+    let currentResult = '';
     updateCounter();
+    
+    // Initialize word counters
+    const inputTextarea = document.getElementById('input');
+    inputTextarea.addEventListener('input', updateInputCounter);
+    updateInputCounter();
+    
+    // Mode selector click handlers
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        selectedMode = this.dataset.mode;
+      });
+    });
     
     function updateCounter() {
       document.getElementById('count').innerText = Math.max(0, 3 - count);
     }
     
+    function updateInputCounter() {
+      const length = inputTextarea.value.length;
+      document.getElementById('inputCount').innerText = length;
+      document.getElementById('inputMax').innerText = '2000';
+    }
+    
+    function getModePrompt() {
+      const activeBtn = document.querySelector('.mode-btn.active');
+      return activeBtn ? activeBtn.dataset.prompt : document.querySelector('.mode-btn[data-mode="standard"]').dataset.prompt;
+    }
+    
+    function showLoading(show) {
+      const resultDiv = document.getElementById('result');
+      if (show) {
+        const loadingHtml = `
+          <div class="loading-overlay">
+            <div class="spinner"></div>
+            <div class="loading-text">⏳ Rewriting your text...</div>
+          </div>
+        `;
+        resultDiv.innerHTML = loadingHtml + `
+          <div class="output-header">
+            <span class="output-label">✨ Rewritten Text:</span>
+          </div>
+          <div id="outputText">Processing...</div>
+          <div class="output-counter">
+            <span id="outputCount">0</span> characters
+            <button class="copy-btn" id="copyBtn" onclick="copyResult()" style="display:none;">📋 Copy to Clipboard</button>
+          </div>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="output-header">
+            <span class="output-label">✨ Rewritten Text:</span>
+          </div>
+          <div id="outputText">${currentResult || 'Your rewritten text will appear here...'}</div>
+          <div class="output-counter">
+            <span id="outputCount">${currentResult ? currentResult.length : 0}</span> characters
+            <button class="copy-btn" id="copyBtn" onclick="copyResult()" style="${currentResult ? 'display:inline-block' : 'display:none'}">📋 Copy to Clipboard</button>
+          </div>
+        `;
+      }
+    }
+    
+    async function copyResult() {
+      if (!currentResult) return;
+      
+      try {
+        await navigator.clipboard.writeText(currentResult);
+        const copyBtn = document.getElementById('copyBtn');
+        const originalText = copyBtn.innerText;
+        copyBtn.innerText = '✅ Copied!';
+        copyBtn.style.background = 'linear-gradient(135deg,#28a745 0%,#20c997 100%)';
+        
+        setTimeout(() => {
+          copyBtn.innerText = originalText;
+        }, 2000);
+      } catch(e) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = currentResult;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        const copyBtn = document.getElementById('copyBtn');
+        copyBtn.innerText = '✅ Copied!';
+        setTimeout(() => {
+          copyBtn.innerText = '📋 Copy to Clipboard';
+        }, 2000);
+      }
+    }
+    
     async function rewrite() {
       if(count >= 3) {
-        document.getElementById('result').innerHTML = '⚠️ Daily free limit reached!\n\n📩 Get unlimited access:\n👉 Telegram: @zhao5588\n\n✨ Pricing:\n• $10 - Unlimited paraphrasing\n• $15 - API key for your own projects\n• $60 - I build a custom AI tool for you\n\n💳 Payment: PayPal / USDT';
+        currentResult = '⚠️ Daily free limit reached!\n\n📩 Get unlimited access:\n👉 Telegram: @zhao5588\n\n✨ Pricing:\n• $10 - Unlimited paraphrasing\n• $15 - API key for your own projects\n• $60 - I build a custom AI tool for you\n\n💳 Payment: PayPal / USDT';
+        showLoading(false);
         document.getElementById('btn').innerText = '⚠️ Limit Reached';
         return;
       }
@@ -88,9 +230,11 @@
       let btn = document.getElementById('btn');
       btn.disabled = true;
       btn.innerText = '⏳ Processing...';
-      document.getElementById('result').innerText = '🔄 Rewriting your text...\n\nPlease wait a few seconds...';
+      currentResult = '';
+      showLoading(true);
       
       try {
+        const modePrompt = getModePrompt();
         const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
           method: "POST",
           headers: {
@@ -102,7 +246,7 @@
             messages: [
               {
                 role: "system", 
-                content: "You are a professional text rewriter. Rewrite the given text to make it unique while keeping the same meaning. Use different words and sentence structure. Keep the same tone and style."
+                content: modePrompt
               },
               {
                 role: "user", 
@@ -119,15 +263,18 @@
         }
         
         const data = await res.json();
-        let out = data.choices?.[0]?.message?.content || "Error processing text. Please try again.";
+        currentResult = data.choices?.[0]?.message?.content || "Error processing text. Please try again.";
         
-        document.getElementById('result').innerText = out;
+        showLoading(false);
+        document.getElementById('outputCount').innerText = currentResult.length;
+        
         count++;
         localStorage.setItem('paraphrase_count', count.toString());
         updateCounter();
         
       } catch(e) {
-        document.getElementById('result').innerText = "❌ Error: " + e.message + "\n\nPlease try again or contact @zhao5588 for help.";
+        currentResult = "❌ Error: " + e.message + "\n\nPlease try again or contact @zhao5588 for help.";
+        showLoading(false);
       }
       
       btn.disabled = false;
